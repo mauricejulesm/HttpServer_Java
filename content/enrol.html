@@ -17,11 +17,10 @@
 </div>
 
 <div class="main-header">
-    <p style="fontweight: 200">Welcome!</p>
+    <h2 style="fontweight: 200">Enrolment Form</h2>
 </div>
-<form action="http://localhost:8085" method="POST">
+<form class="login_form" action="http://localhost:8085" method="POST">
 
-    <div class="container">
         <label><b>First Name</b></label>
         <input type="text" placeholder="Enter Full Name" name="uname" required>
 
@@ -30,9 +29,10 @@
 
         <label><b>Card Number</b></label>
         <input type="text" placeholder="Enter Your Card Number" name="psw" required>
-    </div>
+        <input type="file" name="info" class="choose_file" accept="file_extension|audio/*|video/*|image/*|media_type">
+
     <div class="container" style="background-color:#f1f1f1">
-        <button type="submit">Submit</button>
+        <button type="submit">Enrol</button>
         <button type="button" class="cancelbtn">Cancel</button>
     </div>
 </form>
