@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 public final class JavaHttpServer {
     public static void main(String argv[]) throws Exception {
         // port number.
-        int port = 8085;
+        int port = 9090;
 
         // Establish the listen socket.
         ServerSocket serverSocket = new ServerSocket(port);
@@ -41,21 +41,21 @@ final class HttpRequest implements Runnable {
         try {
             processRequest();
         } catch (Exception e) {
-            System.out.println(e);
+//            System.out.println(e);
         }
     }
 
     private void processRequest() throws Exception {
 
         InputStream inStream = socket.getInputStream();
-        DataOutputStream os = new DataOutputStream(socket.getOutputStream());
-        BufferedReader br = new BufferedReader(new InputStreamReader(inStream));
+        DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inStream));
 
-        String requestLine = br.readLine();// get /path/file.html version of http
+        String requestLine = bufferedReader.readLine();// get /path/file.html version of http
 
         // Display the request line.
         System.out.println();
-        System.out.println(requestLine);
+        System.out.println("Request Line: "+requestLine);
 
         // Extract the filename from the request line.
         StringTokenizer tokens = new StringTokenizer(requestLine);
@@ -97,39 +97,39 @@ final class HttpRequest implements Runnable {
                         "</html>";
         }
 
-        os.writeBytes(statusLine);
-        os.writeBytes(contentTypeLine);
+        dataOutputStream.writeBytes(statusLine);
+        dataOutputStream.writeBytes(contentTypeLine);
 
         //blank line to indicate the end of the header lines.
-        os.writeBytes(CRLF);
+        dataOutputStream.writeBytes(CRLF);
 
 
         //Send the entity body.
         if (fileExists) {
-            sendBytes(fis, os);
-            os.writeBytes(statusLine);
-            os.writeBytes(contentTypeLine);
+            sendBytes(fis, dataOutputStream);
+            dataOutputStream.writeBytes(statusLine);
+            dataOutputStream.writeBytes(contentTypeLine);
             fis.close();
         } else {
-            os.writeBytes(statusLine);
-            os.writeBytes(entityBody);
-            os.writeBytes(contentTypeLine);
+            dataOutputStream.writeBytes(statusLine);
+            dataOutputStream.writeBytes(entityBody);
+            dataOutputStream.writeBytes(contentTypeLine);
         }
 
 
         System.out.println("*****");
-        System.out.println(fileName);
+        System.out.println("File Name: " +fileName);
         System.out.println("*****");
 
         // Get and display the header lines.
         String headerLine;
-        while ((headerLine = br.readLine()).length() != 0) {
+        while ((headerLine = bufferedReader.readLine()).length() != 0) {
             System.out.println(headerLine);
         }
 
         // Close streams and socket.
-        os.close();
-        br.close();
+        dataOutputStream.close();
+        bufferedReader.close();
         socket.close();
     }
 
@@ -144,7 +144,8 @@ final class HttpRequest implements Runnable {
         if (fileName.endsWith(".gif")) {
             return "image/gif";
         }
-        return "application/octet-stream";
+//        return "application/octet-stream";  this line will make the browser download and save file!
+        return "File type is something else!";
     }
 
 

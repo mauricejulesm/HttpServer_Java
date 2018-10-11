@@ -1,24 +1,40 @@
 <html>
-    <head>
-        <title>Http Server</title>
-        <!--Style sheet reference-->
-        <!--<link rel="stylesheet" type="text/css" href="content/css/style.css"/>-->
-        <!--<link rel="shortcut icon" href="content/images/favicon.ico" />-->
+<head>
+    <title>Http Server</title>
+    <!--Style sheet reference-->
+    <link rel="stylesheet" type="text/css" href="./style.css"/>
+    <!--<link rel="shortcut icon" href="content/images/favicon.ico" />-->
 
-        <!--js reference-->
-        <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>-->
-        <!--<script src="node_modules/socket.io-client/dist/socket.io.js"></script>-->
-        <!--<script src="content/scripts/scripts.js"></script>-->
-    </head>
-    <body>
-        <!-- Main Header -->
-        <div class="main-header">
-            <h1 style="fontweight: 300">Server 1 Running...</h1>
-        </div>
+    <!--js reference-->
+    <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>-->
+    <!--<script src="node_modules/socket.io-client/dist/socket.io.js"></script>-->
+    <!--<script src="content/scripts/scripts.js"></script>-->
+</head>
+<body>
+<!-- Main Header -->
+<div class="main-header">
+    <h1 style="fontweight: 300">Server 1 Running...</h1>
+</div>
 
+<div class="main-header">
+    <p style="fontweight: 200">Welcome!</p>
+</div>
+<form action="http://localhost:8085" method="POST">
 
-        <div class="main-header">
-            <p style="fontweight: 200">Welcome!</p>
-        </div>
-    </body>
+    <div class="container">
+        <label><b>First Name</b></label>
+        <input type="text" placeholder="Enter Full Name" name="uname" required>
+
+        <label><b>Last Name</b></label>
+        <input type="text" placeholder="Enter Your Last Name" name="uname" required>
+
+        <label><b>Card Number</b></label>
+        <input type="text" placeholder="Enter Your Card Number" name="psw" required>
+    </div>
+    <div class="container" style="background-color:#f1f1f1">
+        <button type="submit">Submit</button>
+        <button type="button" class="cancelbtn">Cancel</button>
+    </div>
+</form>
+</body>
 </html>
